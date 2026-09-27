@@ -43,7 +43,12 @@ public class ServicioEstudiantes {
         }
     }
     
-    public void actualizar(String cedula, Estudiante nuevo) {
+    public Estudiante actualizar(String cedula, Estudiante nuevo) {
+        Estudiante encontrado = buscarPorCedula(cedula);
+        if (encontrado == null) {
+            return null;
+        }
+
         for (Estudiante estudiante : estudiantes) {
             if (estudiante.getCedula().equals(cedula)) {
                 // opcion 1
@@ -52,8 +57,11 @@ public class ServicioEstudiantes {
                 // opcion 2
                 estudiante.setNombre(nuevo.getNombre());
                 estudiante.setApellido(nuevo.getApellido());
+
+                return estudiante;
             }
         }
+        return null;
     }
 
     public ArrayList<Estudiante> listar() {
